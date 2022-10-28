@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19H1419" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Account" representedClassName="Account" syncable="YES">
+        <attribute name="account_type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="password" attributeType="String"/>
+        <attribute name="status" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="username" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="account" inverseEntity="User"/>
+    </entity>
+    <entity name="Food" representedClassName="Food" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="dislike" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="donatedQuantity" attributeType="Integer 16" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="image" attributeType="Binary"/>
+        <attribute name="isVeg" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="likes" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="postDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="donar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="donatedFoods" inverseEntity="User"/>
+        <relationship name="receiver" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="receivedFoods" inverseEntity="User"/>
+        <relationship name="requests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Request" inverseName="food" inverseEntity="Request"/>
+        <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Review" inverseName="food" inverseEntity="Review"/>
+    </entity>
+    <entity name="Request" representedClassName="Request" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="quantity" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="status" attributeType="String" defaultValueString="requested"/>
+        <relationship name="food" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="requests" inverseEntity="Food"/>
+        <relationship name="requester" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="myRequests" inverseEntity="User"/>
+    </entity>
+    <entity name="Review" representedClassName="Review" syncable="YES">
+        <attribute name="comment" attributeType="String"/>
+        <attribute name="numberOfRatings" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rating" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="food" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Food" inverseName="reviews" inverseEntity="Food"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="reviews" inverseEntity="User"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="aboutMe" optional="YES" attributeType="String"/>
+        <attribute name="address" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="firstname" attributeType="String"/>
+        <attribute name="gender" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastname" optional="YES" attributeType="String"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="phone" attributeType="String" defaultValueString=""/>
+        <attribute name="photo" optional="YES" attributeType="Transformable"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="user" inverseEntity="Account"/>
+        <relationship name="donatedFoods" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" inverseName="donar" inverseEntity="Food"/>
+        <relationship name="myRequests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Request" inverseName="requester" inverseEntity="Request"/>
+        <relationship name="receivedFoods" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" inverseName="receiver" inverseEntity="Food"/>
+        <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Review" inverseName="user" inverseEntity="Review"/>
+    </entity>
+    <elements>
+        <element name="Account" positionX="-97.515625" positionY="-31.84375" width="128" height="118"/>
+        <element name="Food" positionX="501.75390625" positionY="-32.6328125" width="128" height="238"/>
+        <element name="Request" positionX="311.58984375" positionY="234.34375" width="128" height="118"/>
+        <element name="Review" positionX="-57.40234375" positionY="281.4140625" width="128" height="118"/>
+        <element name="User" positionX="109.6328125" positionY="-66.828125" width="128" height="268"/>
+    </elements>
+</model>
